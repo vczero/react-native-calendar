@@ -1,6 +1,3 @@
-
-'use strict';
-
 var React = require('react-native');
 
 var {
@@ -17,6 +14,9 @@ var Calendar = React.createClass({
   getInitialState: function(){
     //开始时间
     var startTime = this.props.startTime || new Date();
+    var holiday = this.props.holiday || {
+      "国庆节": "2015-10-1"
+    };
     //显示月份的个数
     var num = this.props.num || 3;
     return {
@@ -48,6 +48,7 @@ var Calendar = React.createClass({
           var dayNum = j - week + 1;
           if(dayNum > 0 && j < counts + week){
             //如果当前日期小于今天，则变灰
+            var dateStr = date.getFullYear() + '-' + (date.getMonth() + n + 1) + '-' + dayNum;
             var grayStyle = {};
             if(dateNow >= new Date(date.getFullYear(), date.getMonth() + n, dayNum + 1)){
               grayStyle = {
@@ -55,7 +56,7 @@ var Calendar = React.createClass({
               };
             }
             days.push(
-              <TouchableHighlight style={[styles.flex_1]} underlayColor="#fff">
+              <TouchableHighlight style={[styles.flex_1]} underlayColor="#fff" onPress={this.props.touchEvent.bind(this, dateStr)}>
                 <View >
                   <Text style={grayStyle}>{dayNum}</Text>
                 </View>
@@ -86,7 +87,6 @@ var Calendar = React.createClass({
     }
 
     return (
-      <View style={styles.container}>
         <View style={styles.calendar_container}>
 
           <View style={[styles.row, styles.row_header]}>
@@ -120,7 +120,6 @@ var Calendar = React.createClass({
           </ScrollView>
 
         </View>
-      </View>
     );
   }
 });
@@ -167,7 +166,6 @@ var styles = StyleSheet.create({
     borderBottomWidth:1/PixelRatio.get(),
     borderBottomColor:'#ccc',
   }
-
 });
 
 module.exports = Calendar;
