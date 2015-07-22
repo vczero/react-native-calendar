@@ -56,7 +56,7 @@ var Calendar = React.createClass({
               };
             }
             days.push(
-              <TouchableHighlight style={[styles.flex_1]} underlayColor="#fff" onPress={this.props.touchEvent.bind(this, dateStr)}>
+              <TouchableHighlight style={[styles.flex_1]} underlayColor="#fff" onPress={this.props.touchEvent?this.props.touchEvent.bind(this, dateStr):null}>
                 <View >
                   <Text style={grayStyle}>{dayNum}</Text>
                 </View>
