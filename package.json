@@ -1,0 +1,20 @@
+{
+  "name": "rn-calendar",
+  "version": "0.0.1",
+  "description": "基于React Native的日历",
+  "main": "index.js",
+  "keywords": ["calendar", "react native"],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vczero/react-native-calendar.git"
+  },
+  "author": "vczero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vczero/react-native-calendar/issues"
+  },
+  "homepage": "https://github.com/vczero/react-native-calendar#readme"
+}
