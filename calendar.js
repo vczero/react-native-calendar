@@ -1,3 +1,6 @@
+
+'use strict';
+
 var React = require('react-native');
 
 var {
@@ -14,19 +17,27 @@ var Calendar = React.createClass({
   getInitialState: function(){
     //开始时间
     var startTime = this.props.startTime || new Date();
-    var holiday = this.props.holiday || {
-      "国庆节": "2015-10-1"
-    };
+    var holiday = this.props.holiday || {};
+    var check = this.props.check || {};
+    var headerStyle = this.props.headerStyle || {};
     //显示月份的个数
     var num = this.props.num || 3;
     return {
       startTime: startTime,
-      num: num
+      num: num,
+      holiday: holiday,
+      check: check,
+      headerStyle: headerStyle
     };
   },
+
   render: function() {
     var date = this.state.startTime;
     var num = this.state.num;
+    var holiday = this.state.holiday;
+    var check = this.state.check;
+    var headerStyle = this.state.headerStyle;
+
     var items = [];
     var dateNow = new Date();
 
@@ -48,16 +59,33 @@ var Calendar = React.createClass({
           var dayNum = j - week + 1;
           if(dayNum > 0 && j < counts + week){
             //如果当前日期小于今天，则变灰
-            var dateStr = date.getFullYear() + '-' + (date.getMonth() + n + 1) + '-' + dayNum;
+            var dateObj = new Date(date.getFullYear(), date.getMonth() + n, dayNum);
+            var dateStr = dateObj.getFullYear() + '-' + (dateObj.getMonth() + 1) + '-' + dayNum;
             var grayStyle = {};
+            var bk = {};
             if(dateNow >= new Date(date.getFullYear(), date.getMonth() + n, dayNum + 1)){
               grayStyle = {
                 color:'#ccc'
               };
             }
+            if(holiday[dateStr]){
+              dayNum = holiday[dateStr];
+            }
+            if(check[dateStr]){
+              bk = {
+                backgroundColor: '#1EB7FF',
+                width:46,
+                height:35,
+                alignItems: 'center',
+                justifyContent: 'center'
+              };
+              grayStyle = {
+                color:'#fff'
+              };
+            }
             days.push(
               <TouchableHighlight style={[styles.flex_1]} underlayColor="#fff" onPress={this.props.touchEvent?this.props.touchEvent.bind(this, dateStr):null}>
-                <View >
+                <View style={bk}>
                   <Text style={grayStyle}>{dayNum}</Text>
                 </View>
               </TouchableHighlight>
@@ -89,27 +117,27 @@ var Calendar = React.createClass({
     return (
         <View style={styles.calendar_container}>
 
-          <View style={[styles.row, styles.row_header]}>
+          <View style={[styles.row, styles.row_header, this.props.headerStyle]}>
             <View style={[styles.flex_1]}>
-              <Text>一</Text>
+              <Text style={this.props.headerStyle}>一</Text>
             </View>
             <View style={[styles.flex_1]}>
-              <Text>二</Text>
+              <Text style={this.props.headerStyle}>二</Text>
             </View>
             <View style={[styles.flex_1]}>
-              <Text>三</Text>
+              <Text style={this.props.headerStyle}>三</Text>
             </View>
             <View style={[styles.flex_1]}>
-              <Text>四</Text>
+              <Text style={this.props.headerStyle}>四</Text>
             </View>
             <View style={[styles.flex_1]}>
-              <Text>五</Text>
+              <Text style={this.props.headerStyle}>五</Text>
             </View>
             <View style={[styles.flex_1]}>
-              <Text style={styles.week_highlight}>六</Text>
+              <Text style={[styles.week_highlight,  this.props.headerStyle]}>六</Text>
             </View>
             <View style={[styles.flex_1]}>
-              <Text style={styles.week_highlight}>日</Text>
+              <Text style={[styles.week_highlight,  this.props.headerStyle]}>日</Text>
             </View>
           </View>
 
@@ -127,7 +155,7 @@ var Calendar = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop:30,
+    backgroundColor:'blue'
   },
   flex_1:{
     flex:1,
@@ -160,7 +188,7 @@ var styles = StyleSheet.create({
     fontWeight:'400',
   },
   week_highlight:{
-    color:'#126AFF'
+    color:'#23B8FC'
   },
   cm_bottom:{
     borderBottomWidth:1/PixelRatio.get(),
@@ -169,3 +197,9 @@ var styles = StyleSheet.create({
 });
 
 module.exports = Calendar;
+
+
+
+
+
+
