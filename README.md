@@ -3,6 +3,8 @@ React-Native日历组件
 
 ###一、安装
 
+![](npm.png)
+
     npm install rn-calendar
 
 ###二、效果
