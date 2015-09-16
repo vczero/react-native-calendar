@@ -1,6 +1,6 @@
 {
   "name": "rn-calendar",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "基于React Native的日历",
   "main": "index.js",
   "keywords": ["calendar", "react native"],

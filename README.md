@@ -1,17 +1,17 @@
 # react-native-calendar
 React-Native日历组件
 
-###一、安装
+### 一、安装
 
     npm install rn-calendar
 
-###二、效果
+### 二、效果
 
 ![](./demo.png)
 
 
-###三、用法指南
-（1）示例Demo
+### 三、用法指南
+（1）示例Demo            
 
     var React = require('react-native');
     var Calendar = require('rn-calendar');
@@ -71,7 +71,7 @@ React-Native日历组件
 
     AppRegistry.registerComponent('reactCalendar', () => Index);
 
- （2）属性
+ （2）属性       
 
     touchEvent：用户点击时获取的时间，可选
     headerStyle：星期条的颜色和字体样式设置， 可选
