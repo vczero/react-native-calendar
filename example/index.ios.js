@@ -28,7 +28,7 @@ var Index = React.createClass({
       backgroundColor: '#3C9BFD',
       color:'#fff',
       fontSize: 15,
-      fontWeight:500,
+      fontWeight:'500',
     };
     return (
       <View style={styles.container}>
